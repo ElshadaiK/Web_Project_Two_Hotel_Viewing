@@ -56,3 +56,35 @@ async function getData(query){
 	return data
 	
 }
+
+async function get_details(destinationId){
+	const query = `/properties/get-details?id=${destinationId}&locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08`
+	let result = await getData(query);
+	let data = result.data.body
+
+	//get hotel attributes
+	let guestReview = data.guestReviews.brands;
+	let freeService = data.propertyDescription.freebies[0];
+	let address = data.propertyDescription.address;
+	let hotelStar = data.propertyDescription.starRating 
+	let neighbourhood = result.neighborhood.neighborhoodName;
+	let price = data.propertyDescription.featuredPrice.currentPrice.formatted;
+	let transport = result.transportation.transportLocations[0].locations[0];
+	let roomType = data.propertyDescription.roomTypeNames
+
+	//-----------hotel object creation-----------------------------------
+
+	// let hotel = Object.create(Hotel)
+	let hotel = new Hotel();
+	hotel.address = address;
+	hotel.hotelStar = hotelStar;
+	hotel.neighbourhood = neighbourhood;
+	hotel.price = price;
+	hotel.transportation = transport;
+	hotel.guestReviews = guestReview;
+	hotel.freeService = freeService
+	hotel.room = roomType;
+
+	return hotel;
+	
+}
