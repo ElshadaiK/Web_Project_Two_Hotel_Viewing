@@ -1,19 +1,21 @@
-const body = document.getElementById('body')
-document.addEventListener('DOMContentLoaded',
-    letUsTry)
+const search = document.querySelector('#search');
+const collections = document.querySelector('#collections');
+const destination = document.querySelector('#destination');
+const adult = document.querySelector('#adult');
+const children = document.querySelector('#children');
+const checkin = document.querySelector('#checkin');
+const checkout = document.querySelector('#checkout');
+const results = document.querySelector("#results")
+search.addEventListener('click', getValues)
 
-function letUsTry() {
-    fetch("https://hotels4.p.rapidapi.com/properties/list?destinationId=1506246&pageNumber=1&checkIn=2020-01-08&checkOut=2020-01-15&pageSize=25&adults1=1&currency=USD&locale=en_US&sortOrder=PRICE", {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-key": "289d62e124mshbe3bb313c950df5p109353jsnbf9a14816df1",
-                "x-rapidapi-host": "hotels4.p.rapidapi.com"
-            }
-        })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(err => {
-            console.error(err);
-        });
+function getValues(e){
+    const destinationValue = destination.value
+    const adultValue = adult.value 
+    const childrenValue = children.value
+    const checkinValue = checkin.value
+    const checkoutValue = checkout.value
+    searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue)
+}
+function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue){
+
 }
