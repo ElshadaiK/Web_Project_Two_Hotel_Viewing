@@ -52,7 +52,7 @@ nav{
 }
 .header-area .navbar-dark {
   width: 100%;
-  background-color: transparent;
+  background: rgba(0,0,0, .5);
   border-bottom: 2px solid rgba(203, 134, 112, 0.63);
 }
 /*---------------------------------------------*/
