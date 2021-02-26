@@ -14,7 +14,25 @@ function getValues(e){
     const childrenValue = children.value
     const checkinValue = checkin.value
     const checkoutValue = checkout.value
-    searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue)
+    if(destinationValue == null){
+        //code
+        return
+    }
+    else if(adultValue == null){
+        //code
+        return
+    }
+    else if(checkinValue == null){
+        //code
+        return
+    }
+    else if(checkoutValue == null){
+        //code
+        return
+    }
+    else{
+        searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue);
+    }
 }
 async function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue){
     let hotelName = '';
@@ -31,8 +49,9 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 		destinationId = element['destinationId']
 
 		hotelName = element['name']
-		let hotel = await get_details(destinationId);
+		let hotel = await get_details(destinationId,adultValue,checkinValue,checkoutValue);
 		hotel.name = hotelName;
+
 		hotelList.push(hotel);
 		
 	}
@@ -57,8 +76,8 @@ async function getData(query){
 	
 }
 
-async function get_details(destinationId){
-	const query = `/properties/get-details?id=${destinationId}&locale=en_US&currency=USD&checkOut=2020-01-15&adults1=1&checkIn=2020-01-08`
+async function get_details(destinationId, adultValue, checkinValue, checkoutValue){
+	const query = `/properties/get-details?id=${destinationId}&locale=en_US&currency=USD&checkOut=${checkoutValue}&adults1=${adultValue}&checkIn=${checkinValue}`
 	let result = await getData(query);
 	let data = result.data.body
     let price= '$';
@@ -90,6 +109,35 @@ async function get_details(destinationId){
 	hotel.freeService = freeService
 	hotel.room = roomType;
 
+    
+    let images = await get_hotel_photos(destinationId)
+    hotel.hotelImage = images.hotelImages
+    hotel.roomImage = images.roomImages
+
 	return hotel;
 	
+}
+
+async function get_hotel_photos(id){
+	const query = `properties/get-hotel-photos?id=${id}`
+	let result = await getData(query);
+
+	let imgUrl;
+	let hotelImage = result.hotelImages;
+	let roomImage = result.roomImages;
+	let images = new Images();
+	hotelImage.forEach(element => {
+		imgUrl = element.baseUrl;
+		imgUrl = `${imgUrl.slice(0,imgUrl.length-11)}.jpg`
+		images.hotelImages.push(imgUrl);
+	});
+	
+	roomImage.forEach(element => {
+		element.images.forEach(image => {
+			imgUrl = image.baseUrl;
+			imgUrl = `${imgUrl.slice(0,imgUrl.length-11)}.jpg`
+			images.roomImages.push(imgUrl);
+		});
+	});
+	return images;
 }

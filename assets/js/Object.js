@@ -1,4 +1,5 @@
 class Hotel{
+    id = ''
     name = ""
     hotelStar=""
     neighbourhood=""
@@ -25,6 +26,8 @@ class Hotel{
         provinceName:""
     }
     room=[]
+    hotelImage = []
+    roomImage = []
 
     constructor(){
         
@@ -33,4 +36,9 @@ class Hotel{
 }
 
 
+class Images{
+    hotelImages = []
+    roomImages = []
 
+    constructor(){}
+}
