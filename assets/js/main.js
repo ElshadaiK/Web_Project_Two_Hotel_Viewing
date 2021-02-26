@@ -41,7 +41,7 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 
 	const query = `locations/search?query=${destinationValue}`;
 	let result = await getData(query);
-	let hotels = result["suggestions"][1]['entities'];
+	try{let hotels = result["suggestions"][1]['entities'];
 
 	
 	for (let i = 0; i < hotels.length; i++) {
@@ -58,7 +58,10 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 
 	
 	
-	console.log(hotelList);
+	console.log(hotelList);}
+	catch(err){
+		console.log("Error loading the data", err)
+	}
 }
 
 async function getData(query){
