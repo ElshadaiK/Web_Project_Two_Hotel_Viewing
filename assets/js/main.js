@@ -163,6 +163,20 @@ async function get_hotel_photos(id){
 }
 
 function horizontal_card(hotel){
+	let rImage =[];
+	
+	if(hotel.hotelImage.length > 8){
+		for (let i = 0; i < 4; i++) {
+			hImage.push(hotel.hotelImage[i])
+		}
+	}else{
+		for (let i = 0; i < hotel.hotelImage.length; i++) {
+			const element = hotel.hotelImage[i];
+			
+		}
+	}
+	
+	
 	
 	let card = `
 			
@@ -177,7 +191,7 @@ function horizontal_card(hotel){
 	
 							<p class="card-text mb-2">${hotel.transportation.distanceInTime} to ${hotel.transportation.name}</p>
 							<h5 mb-3>${hotel.guestReviews.formattedRating}  ${hotel.guestReviews.badgeText}</h5>
-							<a href="../../detail.html" class="btn btn-primary">Detail</a>
+							<a href="../detail.html?hotelImage=${hImage}" class="btn btn-primary">Detail</a>
 						</div>
 						<div class="col-1">
 							<h3>${hotel.price}</h3>
