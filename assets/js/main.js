@@ -8,6 +8,8 @@ const checkout = document.querySelector('#checkout');
 const results = document.querySelector("#results")
 search.addEventListener('click', getValues)
 
+
+
 function getValues(e){
     const destinationValue = destination.value
     const adultValue = adult.value 
@@ -37,39 +39,40 @@ function getValues(e){
 async function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue){
     let hotelName = '';
 	let destinationId = '';
-	let hotelList = [];
 
+	results.innerHTML = "";
 	const query = `locations/search?query=${destinationValue}`;
 	let result = await getData(query);
-	try{let hotels = result["suggestions"][1]['entities'];
-
 	
-	for (let i = 0; i < hotels.length; i++) {
-		const element = hotels[i];
-		destinationId = element['destinationId']
+	try{
+		// console.log("try-catch inside");
+		let hotels = result["suggestions"][1]['entities'];
+		for (let i = 0; i < hotels.length; i++) {
+			const element = hotels[i];
+			destinationId = element['destinationId']
 
-		hotelName = element['name']
-		let hotel = await get_details(destinationId,adultValue,checkinValue,checkoutValue);
-		hotel.name = hotelName;
-
-		hotelList.push(hotel);
+			hotelName = element['name']
+			let hotel = await get_details(destinationId,adultValue,checkinValue,checkoutValue);
+			hotel.name = hotelName;
+			hotel.id = destinationId; 
+		}
+		
 		
 	}
-
-	
-	
-	console.log(hotelList);}
 	catch(err){
-		console.log("Error loading the data", err)
+		console.log("Error loading the data",err)
 	}
 }
+
+
+
 
 async function getData(query){
 
 	let response =  await fetch(`https://hotels4.p.rapidapi.com/${query}`, {
 		"method": "GET",
-		"headers":  {
-			"x-rapidapi-key": "7fcd0ac249mshb557fe351c75ec4p1ffb75jsnc7d2a4272236",
+		"headers": {
+			"x-rapidapi-key": "58cca75488msh34acc7bddef96f8p176275jsn0f6ec88c7799",
 			"x-rapidapi-host": "hotels4.p.rapidapi.com"
 		}
 	})
@@ -80,20 +83,23 @@ async function getData(query){
 }
 
 async function get_details(destinationId, adultValue, checkinValue, checkoutValue){
+	console.log(destinationId);
 	const query = `/properties/get-details?id=${destinationId}&locale=en_US&currency=USD&checkOut=${checkoutValue}&adults1=${adultValue}&checkIn=${checkinValue}`
 	let result = await getData(query);
 	let data = result.data.body
     let price= '$';
 	//get hotel attributes
-	let guestReview = data.guestReviews.brands;
+	let guestReview ="";
 	let freeService = data.propertyDescription.freebies[0];
 	let address = data.propertyDescription.address;
 	let hotelStar = data.propertyDescription.starRating 
 	let neighbourhood = result.neighborhood.neighborhoodName;
     try {
         price = data.propertyDescription.featuredPrice.currentPrice.formatted;
+		guestReview = data.guestReviews.brands;
     } catch (error) {
         price = '$';
+		guestReview = null;
     }
 	
 	let transport = result.transportation.transportLocations[0].locations[0];
@@ -108,7 +114,14 @@ async function get_details(destinationId, adultValue, checkinValue, checkoutValu
 	hotel.neighbourhood = neighbourhood;
 	hotel.price = price;
 	hotel.transportation = transport;
-	hotel.guestReviews = guestReview;
+	
+	if(guestReview){
+		hotel.guestReviews = guestReview
+		
+	}
+	else{
+		hotel.guestReviews.badgeText = "No review"
+	}
 	hotel.freeService = freeService
 	hotel.room = roomType;
 
