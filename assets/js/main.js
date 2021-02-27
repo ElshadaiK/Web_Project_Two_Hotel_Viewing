@@ -157,3 +157,28 @@ async function get_hotel_photos(id){
 	});
 	return images;
 }
+
+function horizontal_card(hotel){
+	
+	let card = `
+			
+				<div class="card mb-2 ml-5">
+					<div class="row">
+						<img class="col-4" src=${hotel.hotelImage[0]} alt="Card image" >
+						<div class="card-body col-7">
+							<h4 class="card-title">${hotel.name}<span> -${hotel.hotelStar} Star</span></h4>
+							
+							<h6 mb-2>${hotel.address.fullAddress}</h6>
+							<h5>${hotel.neighbourhood}</h5>
+	
+							<p class="card-text mb-2">${hotel.transportation.distanceInTime} to ${hotel.transportation.name}</p>
+							<h5 mb-3>${hotel.guestReviews.formattedRating}  ${hotel.guestReviews.badgeText}</h5>
+							<a href="../../detail.html" class="btn btn-primary">Detail</a>
+						</div>
+						<div class="col-1">
+							<h3>${hotel.price}</h3>
+						</div>
+					</div>
+				</div>`;
+	return card;
+}
