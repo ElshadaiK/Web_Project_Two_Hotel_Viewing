@@ -55,6 +55,7 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 			let hotel = await get_details(destinationId,adultValue,checkinValue,checkoutValue);
 			hotel.name = hotelName;
 			hotel.id = destinationId; 
+			display_serach(hotel)
 		}
 		
 		
@@ -63,7 +64,10 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 		console.log("Error loading the data",err)
 	}
 }
-
+function display_serach(hotel){
+	let output = horizontal_card(hotel);
+	results.innerHTML += output;
+}
 
 
 
