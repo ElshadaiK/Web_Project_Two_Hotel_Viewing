@@ -76,4 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error(error));
     }
+
+    forgot.addEventListener('click', forgotPassword);
+    function forgotPassword() {
+        clear();
+        password.style.display = "none";
+        header_text.style.display = "none";
+        register.style.display = "none";   
+    }
+
+    reg.addEventListener('click', registerin);
+    function registerin() {
+        if (!email_input.value || !password_input.value || !confirm_input.value) {
+            alert("Sign again");
+        } else if (password_input.value !== confirm_input.value) {
+            alert("Incorrect input");
+        } else {
+            addUser();            
+        }  
+        registration();    
+    }
+
 });
