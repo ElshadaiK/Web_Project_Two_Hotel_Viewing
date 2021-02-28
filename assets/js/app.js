@@ -36,4 +36,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem("userEmail", email_input.value);
     }
+
+    function checkUser(data) {        
+        let emailUser = data.userEmail;
+        let objectStore = DBUser.transaction('users').objectStore('users');
+        return new Promise(function(resolve, reject) {
+            let request = objectStore.get(emailUser);            
+            request.onsuccess = function() {
+                resolve(request.result);
+            }
+            request.onerror = function() {
+                reject(Error("Couldn't find in database"));
+            }
+        });
+
+    }
+
+    clear();
 });
