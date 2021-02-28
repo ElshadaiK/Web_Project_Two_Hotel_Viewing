@@ -53,4 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     clear();
+    register.addEventListener('click', registration);
+    function registration() {
+        unclear();          
+    }
+
+    sign.addEventListener('click', signin) 
+    function signin() {   
+        data = {
+            userEmail: String(email_input.value),
+            password: String(password_input.value)
+        }     
+        checkUser(data)
+            .then(result => {
+                if (data.password === result.password) {
+                    localStorage.setItem("userEmail", result.userEmail);
+                    console.log("Successfully found user");
+
+                } else{
+                    console.log("Incorrect input");
+                }       
+            })
+            .catch(error => console.error(error));
+    }
 });
