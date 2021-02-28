@@ -6,11 +6,13 @@ const children = document.querySelector('#children');
 const checkin = document.querySelector('#checkin');
 const checkout = document.querySelector('#checkout');
 const results = document.querySelector("#results")
+const resultHolder = document.querySelector('.results')
 search.addEventListener('click', getValues)
 
 
 
 function getValues(e){
+	resultHolder.style.display = 'block'
     const destinationValue = destination.value
     const adultValue = adult.value 
     const childrenValue = children.value

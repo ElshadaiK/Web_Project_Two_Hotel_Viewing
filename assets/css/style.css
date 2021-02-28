@@ -246,3 +246,6 @@ iframe {
 .booking-form:hover {
   box-shadow: rgba(100, 100, 100, 80%) 0px 8px 16px 0px;
 }
+.results{
+  display: none;
+}
