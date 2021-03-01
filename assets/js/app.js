@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     sign.addEventListener('click', signin) 
-    function signin() {   
+    async function signin() {   
         data = {
             userEmail: String(email_input.value),
             password: String(password_input.value)
@@ -69,10 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.password === result.password) {
                     localStorage.setItem("userEmail", result.userEmail);
                     console.log("Successfully found user");
+                    email_input.value = "";
+                    password_input.value = "";
 
                 } else{
-                    console.log("Incorrect input");
-                }       
+                    console.log("Incorrect input");git
+                    password_input.value = "";
+                }   
             })
             .catch(error => console.error(error));
     }
