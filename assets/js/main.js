@@ -78,7 +78,8 @@ async function getData(query){
 	let response =  await fetch(`https://hotels4.p.rapidapi.com/${query}`, {
 		"method": "GET",
 		"headers": {
-			"x-rapidapi-key": "58cca75488msh34acc7bddef96f8p176275jsn0f6ec88c7799",
+"x-rapidapi-key": "17935c49c3msh8c764a6998183d4p1b8a56jsn8eeec9c8132d"
+
 			"x-rapidapi-host": "hotels4.p.rapidapi.com"
 		}
 	})
