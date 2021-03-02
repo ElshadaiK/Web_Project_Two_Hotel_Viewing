@@ -11,42 +11,42 @@ search.addEventListener('click', getValues)
 
 
 
-function getValues(e){
+function getValues(e) {
 	resultHolder.style.display = 'block'
-    const destinationValue = destination.value
-    const adultValue = adult.value 
-    const childrenValue = children.value
-    const checkinValue = checkin.value
-    const checkoutValue = checkout.value
-    if(destinationValue == null){
-        //code
-        return
-    }
-    else if(adultValue == null){
-        //code
-        return
-    }
-    else if(checkinValue == null){
-        //code
-        return
-    }
-    else if(checkoutValue == null){
-        //code
-        return
-    }
-    else{
-        searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue);
-    }
+	const destinationValue = destination.value
+	const adultValue = adult.value
+	const childrenValue = children.value
+	const checkinValue = checkin.value
+	const checkoutValue = checkout.value
+	if (destinationValue == null) {
+		//code
+		return
+	}
+	else if (adultValue == null) {
+		//code
+		return
+	}
+	else if (checkinValue == null) {
+		//code
+		return
+	}
+	else if (checkoutValue == null) {
+		//code
+		return
+	}
+	else {
+		searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue);
+	}
 }
-async function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue){
-    let hotelName = '';
+async function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue) {
+	let hotelName = '';
 	let destinationId = '';
 
 	results.innerHTML = "";
 	const query = `locations/search?query=${destinationValue}`;
 	let result = await getData(query);
-	
-	try{
+
+	try {
 		// console.log("try-catch inside");
 		let hotels = result["suggestions"][1]['entities'];
 		for (let i = 0; i < hotels.length; i++) {
@@ -54,61 +54,60 @@ async function searchFunction(destinationValue, adultValue, childrenValue, check
 			destinationId = element['destinationId']
 
 			hotelName = element['name']
-			let hotel = await get_details(destinationId,adultValue,checkinValue,checkoutValue);
+			let hotel = await get_details(destinationId, adultValue, checkinValue, checkoutValue);
 			hotel.name = hotelName;
-			hotel.id = destinationId; 
+			hotel.id = destinationId;
 			display_serach(hotel)
 		}
-		
-		
+
+
 	}
-	catch(err){
-		console.log("Error loading the data",err)
+	catch (err) {
+		console.log("Error loading the data", err)
 	}
 }
-function display_serach(hotel){
+function display_serach(hotel) {
 	let output = horizontal_card(hotel);
 	results.innerHTML += output;
 }
 
 
 
-async function getData(query){
+async function getData(query) {
 
-	let response =  await fetch(`https://hotels4.p.rapidapi.com/${query}`, {
+	let response = await fetch(`https://hotels4.p.rapidapi.com/${query}`, {
 		"method": "GET",
 		"headers": {
-"x-rapidapi-key": "17935c49c3msh8c764a6998183d4p1b8a56jsn8eeec9c8132d"
-
+			"x-rapidapi-key": "17935c49c3msh8c764a6998183d4p1b8a56jsn8eeec9c8132d",
 			"x-rapidapi-host": "hotels4.p.rapidapi.com"
 		}
 	})
-	
+
 	let data = await response.json()
 	return data
-	
+
 }
 
-async function get_details(destinationId, adultValue, checkinValue, checkoutValue){
+async function get_details(destinationId, adultValue, checkinValue, checkoutValue) {
 	console.log(destinationId);
 	const query = `/properties/get-details?id=${destinationId}&locale=en_US&currency=USD&checkOut=${checkoutValue}&adults1=${adultValue}&checkIn=${checkinValue}`
 	let result = await getData(query);
 	let data = result.data.body
-    let price= '$';
+	let price = '$';
 	//get hotel attributes
-	let guestReview ="";
+	let guestReview = "";
 	let freeService = data.propertyDescription.freebies[0];
 	let address = data.propertyDescription.address;
-	let hotelStar = data.propertyDescription.starRating 
+	let hotelStar = data.propertyDescription.starRating
 	let neighbourhood = result.neighborhood.neighborhoodName;
-    try {
-        price = data.propertyDescription.featuredPrice.currentPrice.formatted;
+	try {
+		price = data.propertyDescription.featuredPrice.currentPrice.formatted;
 		guestReview = data.guestReviews.brands;
-    } catch (error) {
-        price = '$';
+	} catch (error) {
+		price = '$';
 		guestReview = null;
-    }
-	
+	}
+
 	let transport = result.transportation.transportLocations[0].locations[0];
 	let roomType = data.propertyDescription.roomTypeNames
 
@@ -121,27 +120,27 @@ async function get_details(destinationId, adultValue, checkinValue, checkoutValu
 	hotel.neighbourhood = neighbourhood;
 	hotel.price = price;
 	hotel.transportation = transport;
-	
-	if(guestReview){
+
+	if (guestReview) {
 		hotel.guestReviews = guestReview
-		
+
 	}
-	else{
+	else {
 		hotel.guestReviews.badgeText = "No review"
 	}
 	hotel.freeService = freeService
 	hotel.room = roomType;
 
-    
-    let images = await get_hotel_photos(destinationId)
-    hotel.hotelImage = images.hotelImages
-    hotel.roomImage = images.roomImages
+
+	let images = await get_hotel_photos(destinationId)
+	hotel.hotelImage = images.hotelImages
+	hotel.roomImage = images.roomImages
 
 	return hotel;
-	
+
 }
 
-async function get_hotel_photos(id){
+async function get_hotel_photos(id) {
 	const query = `properties/get-hotel-photos?id=${id}`
 	let result = await getData(query);
 
@@ -151,36 +150,36 @@ async function get_hotel_photos(id){
 	let images = new Images();
 	hotelImage.forEach(element => {
 		imgUrl = element.baseUrl;
-		imgUrl = `${imgUrl.slice(0,imgUrl.length-11)}.jpg`
+		imgUrl = `${imgUrl.slice(0, imgUrl.length - 11)}.jpg`
 		images.hotelImages.push(imgUrl);
 	});
-	
+
 	roomImage.forEach(element => {
 		element.images.forEach(image => {
 			imgUrl = image.baseUrl;
-			imgUrl = `${imgUrl.slice(0,imgUrl.length-11)}.jpg`
+			imgUrl = `${imgUrl.slice(0, imgUrl.length - 11)}.jpg`
 			images.roomImages.push(imgUrl);
 		});
 	});
 	return images;
 }
 
-function horizontal_card(hotel){
-	let rImage =[];
-	
-	if(hotel.hotelImage.length > 8){
+function horizontal_card(hotel) {
+	let hImage = [];
+
+	if (hotel.hotelImage.length > 8) {
 		for (let i = 0; i < 4; i++) {
 			hImage.push(hotel.hotelImage[i])
 		}
-	}else{
+	} else {
 		for (let i = 0; i < hotel.hotelImage.length; i++) {
 			const element = hotel.hotelImage[i];
-			
+
 		}
 	}
-	
-	
-	
+
+
+
 	let card = `
 			
 				<div class="card mb-2 ml-5">
