@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 
-const data = urlParams.get("hotelImage");
+const data = localStorage.getItem("hotel");
 var hImage;
 var hotel;
 
