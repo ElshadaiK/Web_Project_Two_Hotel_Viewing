@@ -158,12 +158,12 @@ function horizontal_card(hotel) {
 	let hImage = [];
 
 	if (hotel.hotelImage.length > 8) {
-		for (let i = 0; i < 4; i++) {
+		for (let i = 0; i < 8; i++) {
 			hImage.push(hotel.hotelImage[i])
 		}
 	} else {
 		for (let i = 0; i < hotel.hotelImage.length; i++) {
-			const element = hotel.hotelImage[i];
+			hImage.push(hotel.hotelImage[i]);
 
 		}
 	}
@@ -178,12 +178,9 @@ function horizontal_card(hotel) {
 						<div class="card-body col-7">
 							<h4 class="card-title">${hotel.name}<span> -${hotel.hotelStar} Star</span></h4>
 							
-							<h6 mb-2>${hotel.address.fullAddress}</h6>
-							<h5>${hotel.neighbourhood}</h5>
-	
-							<p class="card-text mb-2">${hotel.transportation.distanceInTime} to ${hotel.transportation.name}</p>
+							<h6 mb-2>${hotel.address.cityName}</h6>
 							<h5 mb-3>${hotel.guestReviews.formattedRating}  ${hotel.guestReviews.badgeText}</h5>
-							<a href="../detail.html?hotelImage=${hImage}" class="btn btn-primary">Detail</a>
+							<a href="../detail.html?hotelImage=${encodeURIComponent(JSON.stringify(hotel))}" class="btn btn-primary">Detail</a>
 						</div>
 						<div class="col-1">
 							<h3>${hotel.price}</h3>
