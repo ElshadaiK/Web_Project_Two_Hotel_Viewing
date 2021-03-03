@@ -21,11 +21,23 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 })
 
+function display_detail(){
+    img.src = `${hImage[0]}`
+    nameHotel.textContent = hotel.name;
+    address1.textContent = `${hotel.address.fullAddress}` ;
+    free.textContent = `${hotel.freeService}`;
+    hood.textContent = `${hotel.neighbourhood}`;
+    if(hotel.room.length > 0){
+        hotel.room.forEach(element => {
+            room.innerHTML += `<li>${element}</li>`
+        });
+    }
+}
 
 
 function display_hotel_images(){
     let output = '';
-    if(hImage.length > 4){
+    if(hImage.length > 8){
         for (let index = 0; index < 8; index++) {
             const element = hImage[index];
             output += `
