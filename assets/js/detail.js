@@ -1,14 +1,23 @@
 const urlParams = new URLSearchParams(window.location.search);
 
-const hImage = urlParams.get("hotelImage").split(",");
+const data = urlParams.get("hotelImage");
+var hImage;
+var hotel;
 
-const container1 = document.getElementById("container1");
-
+const img = document.getElementById("image")
+const nameHotel = document.getElementById("hotel-name");
+const address1 = document.getElementById("address");
+const free = document.getElementById("free");
+const hood = document.getElementById("hood");
+const room = document.getElementById("room");
 
 document.addEventListener("DOMContentLoaded",()=>{
-    console.log(hImage);
+    hotel = JSON.parse(data)
+    console.log(hotel);
+    hImage = hotel.hotelImage
+    display_detail();
     display_hotel_images();
- 
+    
 
 })
 
