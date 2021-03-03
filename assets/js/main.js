@@ -9,7 +9,9 @@ const results = document.querySelector("#results")
 const resultHolder = document.querySelector('.results')
 search.addEventListener('click', getValues)
 
-
+var date = new Date();
+var today = `${date.getFullYear}-${date.getMonth}-${date.getDay}`;
+var tomorrow = `${date.getFullYear}-${date.getMonth +1}-${date.getDay + 1}`
 
 function getValues(e) {
 	resultHolder.style.display = 'block'
@@ -18,27 +20,15 @@ function getValues(e) {
 	const childrenValue = children.value
 	const checkinValue = checkin.value
 	const checkoutValue = checkout.value
-	if (destinationValue == null) {
-		//code
-		return
+	if(checkinValue >= checkoutValue){
+		alert("invalid date")
 	}
-	else if (adultValue == null) {
-		//code
-		return
-	}
-	else if (checkinValue == null) {
-		//code
-		return
-	}
-	else if (checkoutValue == null) {
-		//code
-		return
-	}
-	else {
-		searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue);
+	else{
+		searchFunction(destinationValue, adultValue, checkinValue, checkoutValue);
+		
 	}
 }
-async function searchFunction(destinationValue, adultValue, childrenValue, checkinValue, checkoutValue) {
+async function searchFunction(destinationValue, adultValue=1, checkinValue= today, checkoutValue=tomorrow) {
 	let hotelName = '';
 	let destinationId = '';
 
