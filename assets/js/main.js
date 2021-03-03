@@ -13,6 +13,7 @@ var date = new Date();
 var today = `${date.getFullYear}-${date.getMonth}-${date.getDay}`;
 var tomorrow = `${date.getFullYear}-${date.getMonth +1}-${date.getDay + 1}`
 
+
 function getValues(e) {
 	resultHolder.style.display = 'block'
 	const destinationValue = destination.value
@@ -168,6 +169,7 @@ function horizontal_card(hotel) {
 		}
 	}
 
+	localStorage.setItem("hotel",JSON.stringify(hotel));
 
 
 	let card = `
@@ -180,7 +182,7 @@ function horizontal_card(hotel) {
 							
 							<h6 mb-2>${hotel.address.cityName}</h6>
 							<h5 mb-3>${hotel.guestReviews.formattedRating}  ${hotel.guestReviews.badgeText}</h5>
-							<a href="../detail.html?hotelImage=${encodeURIComponent(JSON.stringify(hotel))}" class="btn btn-primary">Detail</a>
+							<a href="../detail.html" class="btn btn-primary" target="_blank">Detail</a>
 						</div>
 						<div class="col-1">
 							<h3>${hotel.price}</h3>
