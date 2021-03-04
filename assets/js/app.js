@@ -1,25 +1,20 @@
 let DBUser;
 
 document.addEventListener('DOMContentLoaded', () => {   
+    // Open working database
     usersDB()
         .then(response => DBUser = response)
         .catch(error => console.error(error));
-    
+
+    // Login UI
     function clear() {
-        confirm.style.display = "none";
-        reg.style.display = 'none';
+        invisible(confirm, reg, header_login, forg);
+        visible(sign, email, password, header_register, forgot)
+        email_input.value = "";
+        password_input.value = "";
     }
 
-    function unclear() {
-        confirm.style.display = "block";
-        password.style.display = "block";
-        sign.style.display = "none";
-        reg.style.display = 'block';
-        header_text.textContent = "Already have an account?";
-        register.textContent = "Sign in";     
-        forgot.style.display = "none";   
-    }
-
+    // Add user on the users database and localStorage
     function addUser() {
         dataUser = {
             userEmail: String(email_input.value),
@@ -30,14 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         transactionUser.transaction.oncomplete = function (e) {
             let objectStore = DBUser.transaction("users", "readwrite").objectStore("users");
             objectStore.add(dataUser);
-            // form.reset();
             console.log(`Added user`);
             login()
         };
 
         localStorage.setItem("userEmail", email_input.value);
+        email_input.value = "";
+        password_input.value = "";
     }
 
+    // Verify user information before login
     function checkUser(data) {        
         let emailUser = data.userEmail;
         let objectStore = DBUser.transaction('users').objectStore('users');
@@ -53,12 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // Display login on document load
     clear();
-    register.addEventListener('click', registration);
-    function registration() {
-        unclear();          
+
+    // Display login UI when login link clicked
+    login.addEventListener('click', logingin);
+    function logingin() {
+        clear();
     }
 
+    // Display sign up UI when signup link clicked
+    register.addEventListener('click', registration);
+    function registration() {
+        visible(confirm, password, reg, header_login);
+        invisible(sign, forgot, header_register, forg);          
+    }
+
+    // Verification of user information on login
     sign.addEventListener('click', signin) 
     async function signin() {   
         data = {
@@ -67,55 +75,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }     
         checkUser(data)
             .then(result => {
-                if (data.password === result.password) {
+                if(!result) {
+                    return alert(`Invalid input: Please sign in again`);
+                }
+
+                if (data.password === result.password && data.userEmail === result.userEmail) {
                     localStorage.setItem("userEmail", result.userEmail);
                     console.log("Successfully found user");
+                    location.href = ("././home.html");
                     email_input.value = "";
                     password_input.value = "";
-                    login()
-
-                } else{
-                    console.log("Incorrect input");git
+                } 
+                else{
+                    alert("Invalid input: Please sign in again");
+                    email_input.value = "";
                     password_input.value = "";
                 }   
             })
             .catch(error => console.error(error));
     }
 
+    // Display forgot password UI when forgot your password link clicked
     forgot.addEventListener('click', forgotPassword);
     function forgotPassword() {
-        clear();
-        password.style.display = "none";
-        header_text.style.display = "none";
-        register.style.display = "none";   
+        visible(email, header_login, forg);
+        invisible(confirm, reg, sign, header_register, password, forgot);   
     }
 
+    // Verification and signing up of user
     reg.addEventListener('click', registerin);
     function registerin() {
         if (!email_input.value || !password_input.value || !confirm_input.value) {
-            alert("Sign again");
+            alert("Please sign up again");
+        } else if (!(email_input.value).includes("@") || !(email_input.value).includes(".com")) {
+            alert("Please provide the correct email address");
         } else if (password_input.value !== confirm_input.value) {
-            alert("Incorrect input");
+            alert("Invalid input: Please sign up again");
         } else {
-            addUser();            
+            addUser();    
+            location.href = ("././home.html");        
         }  
         registration();    
-    }
-    function login(){
-        relocation('home')
-    }
-    function relocation(chosen) {
-
-        let current_location = location.href
-            // If it's loading locally
-        if ((current_location).includes(".html")) {
-            chosen += ".html"
-        }
-        current_location = (current_location.split('/'))
-        current_location.pop()
-    
-        link = (current_location).join('/') + "/" + chosen
-        location.href = link
     }
     
 

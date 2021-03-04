@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Geez Sign in</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./assets/css/style.css">            -->
     <link rel="stylesheet" href="./assets/css/user.css">
 </head>
 <body>
     <div>
         <div class="wrapper">
-            <form class="signed">
+            <header class="main-header">
+                <div class="container">
+                    <h1 class="name"><a href="index.html">Geez Hotel Reviews</a></h1>
+                    <ul class="main-nav">
+                        <li><a href="./user_login.html" style="visibility: hidden;"><i class="fa fa-user" >&nbsp;Sign in</i></a></li>
+                        <!-- <li><a href="index.html"><Link to="/cart"><FontAwesomeIcon icon="shopping-cart" />&nbsp;Cart</Link></a></li> -->
+                    </ul>
+                </div>
+            </header>
+            <form id="form">
                 <h2 >Sign in</h2>
-                <p class="header_text" >Don't have an account? <a class="register">Register</a></p>
+                <p class="header_register" >Don't have an account? <a class="register">Sign up</a></p>
+                <p class="header_login" >Already have an account? <a class="login">Log in</a></p>
                 <div class="email">
                     <label>
                         Email
@@ -32,8 +44,9 @@
                     </label>
                 </div>
                 <a class="forgot" style="text-align: rightl;margin-bottom: 4%; font-size: 85%">Forgot your password?</a>
-                <a ><input id="sign" type="button" value="Sign in"/></a>
-                <a ><input id="reg" type="button" value="Sign in"/></a>
+                <a><input id="sign" type="button" value="Log in"/></a>
+                <a><input id="reg" type="button" value="Sign in"/></a>
+                <a><input id="forg" type="button" value="Send verification"/></a>
             </form>
 
             <div class="main-footer"> 
