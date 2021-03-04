@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             objectStore.add(dataUser);
             // form.reset();
             console.log(`Added user`);
+            login()
         };
 
         localStorage.setItem("userEmail", email_input.value);
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("Successfully found user");
                     email_input.value = "";
                     password_input.value = "";
+                    login()
 
                 } else{
                     console.log("Incorrect input");git
@@ -99,5 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }  
         registration();    
     }
+    function login(){
+        relocation('home')
+    }
+    function relocation(chosen) {
+
+        let current_location = location.href
+            // If it's loading locally
+        if ((current_location).includes(".html")) {
+            chosen += ".html"
+        }
+        current_location = (current_location.split('/'))
+        current_location.pop()
+    
+        link = (current_location).join('/') + "/" + chosen
+        location.href = link
+    }
+    
 
 });

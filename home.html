@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <!-- =========================================================================================== -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <!--===============================================================================================-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- ====================================================== -->
+    <script src="https://kit.fontawesome.com/dec944d78f.js" crossorigin="anonymous"></script>
+    <!--===============================================================================================-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500&display=swap" rel="stylesheet">
+    <!--===============================================================================================-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;700&display=swap" rel="stylesheet">
+    <!--===============================================================================================-->
+
+</head>
+
+<body>
+    <header class="header-area">
+        <nav class="navbar navbar-dark fixed-top navbar-expand-lg mb-4 " id="navbar-main">
+            <section class="container">
+                <a class="navbar-brand" href="#">Hotel View</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <section class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">
+                                <span>
+                                    Services
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">
+                                <span>
+                                    Services
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </nav>
+    </header>
+    <div class="bg-wrap">
+        <div class="overlay"></div>
+        <div class="container">
+
+        </div>
+    </div>
+    <section class="ftco-section ftco-no-pb ftco-no-pt ftco-booking">
+        <div class="container">
+            <div class="block-32">
+                <form action="#" class="booking-form">
+                    <div class="row">
+                        <div class="col-12 wrap-input100 validate-input location">
+                            <input class="input input100" type="text" name="location" placeholder="Destination"
+                                id="destination" required>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 wrap-input50 adult">
+                            <input class="input input50" type="number" name="adult" placeholder="Adults" id="adult" required>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="col-6 wrap-input50 children">
+                            <input class="input input50" type="number" name="children" placeholder="Children"
+                                id="children">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-6" for="checkin">Check In</label>
+
+                        <label class="col-6" for="checkout">Check Out</label>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6 wrap-input50 checkin">
+                            <input class="input input50" type="date" name="checkin" placeholder="Check In" id="checkin" required>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="col-6 wrap-input50 checkout">
+                            <input class="input input50" type="date" name="checkout" placeholder="Check Out"
+                                id="checkout" required>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <div class="ml-auto p-2">
+                                <input class="input login100-form-btn" type="button" id="search" value="Look for it">
+
+                                <span class="focus-input100"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <div class="row my-5 mx-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="">
+                <input class="input login100-form-btn" type="button" id="collections" value="Check our collections">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <section class="results p-2">
+        <div class="row mx-2">
+            <div class="col-7 d-flex">
+                <div class="">
+                    <h2>Results</h2>
+
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+
+            <div class="col-3 d-flex">
+                <div class="ml-auto p-2">
+                    <span class="">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div id="results">
+            
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+
+</body>
+<!--===============================================================================================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--===============================================================================================-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script data-search-pseudo-elements defer src="https://use.fontawesome.com/releases/latest/js/all.js"></script>
+
+<!--===============================================================================================-->
+<script src="./assets/js/Object.js"></script>
+<script src="./assets/js/main.js"></script>
+
+</html>
