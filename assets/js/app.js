@@ -1,10 +1,12 @@
 let DBUser;
 
 document.addEventListener('DOMContentLoaded', () => {   
+    // Open working database
     usersDB()
         .then(response => DBUser = response)
         .catch(error => console.error(error));
 
+    // Login UI
     function clear() {
         invisible(confirm, reg, header_login, forg);
         visible(sign, email, password, header_register, forgot)
@@ -12,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         password_input.value = "";
     }
 
+    // Add user on the users database and localStorage
     function addUser() {
         dataUser = {
             userEmail: String(email_input.value),
@@ -31,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         password_input.value = "";
     }
 
+    // Verify user information before login
     function checkUser(data) {        
         let emailUser = data.userEmail;
         let objectStore = DBUser.transaction('users').objectStore('users');
@@ -46,18 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // Display login on document load
     clear();
+
+    // Display login UI when login link clicked
     login.addEventListener('click', logingin);
     function logingin() {
         clear();
     }
 
+    // Display sign up UI when signup link clicked
     register.addEventListener('click', registration);
     function registration() {
         visible(confirm, password, reg, header_login);
         invisible(sign, forgot, header_register, forg);          
     }
 
+    // Verification of user information on login
     sign.addEventListener('click', signin) 
     async function signin() {   
         data = {
@@ -86,12 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error(error));
     }
 
+    // Display forgot password UI when forgot your password link clicked
     forgot.addEventListener('click', forgotPassword);
     function forgotPassword() {
         visible(email, header_login, forg);
         invisible(confirm, reg, sign, header_register, password, forgot);   
     }
 
+    // Verification and signing up of user
     reg.addEventListener('click', registerin);
     function registerin() {
         if (!email_input.value || !password_input.value || !confirm_input.value) {

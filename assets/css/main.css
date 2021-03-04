@@ -4,8 +4,6 @@
   line-height: 1.6;
   margin: 0;
 }
-/* color rgba(203, 134, 112, 0.63) */
-/* lighter one rgba(203, 134, 112, 0.63) */
 
 a {
   text-decoration: none;
@@ -185,11 +183,8 @@ img {
   }
 
   img {
-  width: 90%;
+    width: 90%;
   }
 
-/* .second_section {
-  border-bottom: solid lightgrey 1px;
-} */
 
 }
