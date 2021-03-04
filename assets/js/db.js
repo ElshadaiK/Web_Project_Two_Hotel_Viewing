@@ -1,6 +1,6 @@
 const usersDB = () => {
     return new Promise(function(resolve, reject) {
-        let UserDB = indexedDB.open("users", 1);
+        let UserDB = indexedDB.open("users", 2);
         UserDB.onsuccess = function() {
             console.log('Database Ready');
             resolve(UserDB.result);

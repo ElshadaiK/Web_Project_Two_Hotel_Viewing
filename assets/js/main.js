@@ -182,7 +182,7 @@ function horizontal_card(hotel) {
 							
 							<h6 mb-2>${hotel.address.cityName}</h6>
 							<h5 mb-3>${hotel.guestReviews.formattedRating}  ${hotel.guestReviews.badgeText}</h5>
-							<a href="../detail.html" class="btn btn-primary" target="_blank">Detail</a>
+							<a href="detail.html" class="btn btn-primary" target="_blank">Detail</a>
 						</div>
 						<div class="col-1">
 							<h3>${hotel.price}</h3>

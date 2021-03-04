@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let objectStore = DBUser.transaction("users", "readwrite").objectStore("users");
             objectStore.add(dataUser);
             console.log(`Added user`);
+            login()
         };
 
         localStorage.setItem("userEmail", email_input.value);
@@ -95,6 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function registerin() {
         if (!email_input.value || !password_input.value || !confirm_input.value) {
             alert("Please sign up again");
+        } else if (!(email_input.value).includes("@") || !(email_input.value).includes(".com")) {
+            alert("Please provide the correct email address");
         } else if (password_input.value !== confirm_input.value) {
             alert("Invalid input: Please sign up again");
         } else {
@@ -103,5 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }  
         registration();    
     }
+    
 
 });
